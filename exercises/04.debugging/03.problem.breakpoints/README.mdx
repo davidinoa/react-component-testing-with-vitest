@@ -1,0 +1,16 @@
+# Breakpoints
+
+<EpicVideo url="https://www.epicweb.dev/workshops/react-component-testing-with-vitest/debugging-tests/breakpoints" />
+
+Placing a `debugger` statement anywhere in your code or test is not the only way to create a breakpoint. In fact, you might've noticed we have to _modify our test_ to add the `debugger` statement!
+
+That isn't ideal. You can add a breakpoint through your IDE instead:
+
+1. Locate the line of code you want to set a breakpoint at;
+1. Either click on the red circle on the gutter next to that line or right-click the gutter and select "Add a breakpoint":
+
+![A screenshot of Visual Studio code showing two red circles on the gutter next to the code, and an open context menu with the debugging options](/assets/04-03-add-breakpoint.png)
+
+> 🦉 Note that adding a breakpoint on a line will pause the execution **before** that line runs, not after. If you want to pause after a certian action, put a breakpoint after it in the code.
+
+👨‍💼 In this exercise, you've got another bug to tackle. Complete the test case in <InlineFile file="./src/main-menu.browser.test.tsx">`./src/main-menu.browser.test.tsx`</InlineFile>. This is a new component rendering a menu in our app. It looks simple enough but there's something odd about those active links... Once you finish the test, run it in the debug mode and try to see how you can use conditional breakpoints to get to the root cause of the issue.

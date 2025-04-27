@@ -1,0 +1,21 @@
+# Installation and setup
+
+<EpicVideo url="https://www.epicweb.dev/workshops/react-component-testing-with-vitest/vitest-browser-mode/installation-and-setup/solution" />
+
+That's it! :tada: You have everything you need to finally start testing your browser code in the browser.
+
+If you try running tests right now, you will get an error:
+
+```txt nonumber nocopy
+TestingLibraryElementError: Unable to find an element with the text: hello world. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+```
+
+This is because you have to refactor your test suite to correctly render your component in the browser. This is exactly what you are going to do in the next exercise.
+
+## Related materials
+
+Here are a few links that can help you get a grasp over the Vitest's configuration:
+
+- [Getting started with Vitest Browser Mode](https://vitest.dev/guide/browser/)
+- [`browser` configuration reference](https://vitest.dev/guide/browser/config.html)
+- [Configuring Playwright](https://vitest.dev/guide/browser/playwright.html)

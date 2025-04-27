@@ -1,0 +1,40 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Run Vitest Browser",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "npm test ${input:pickTestSuite} -- --inspect-brk --browser --no-file-parallelism",
+			"env": {
+				"DEBUG": "true"
+			}
+		},
+		{
+			"name": "Attach to Vitest Browser",
+			"type": "chrome",
+			"request": "attach",
+			"port": 9229,
+			"timeout": 10000
+		}
+	],
+	"inputs": [
+		{
+			"id": "pickTestSuite",
+			"type": "command",
+			"command": "extension.commandvariable.file.pickFile",
+			"args": {
+				"description": "Pick a test suite",
+				"include": "**/*.browser.test.{ts,tsx}",
+				"multiPick": true
+			}
+		}
+	],
+	"compounds": [
+		{
+			"name": "Debug Vitest Browser",
+			"configurations": ["Attach to Vitest Browser", "Run Vitest Browser"],
+			"stopAll": true
+		}
+	]
+}

@@ -1,0 +1,62 @@
+# Playwright
+
+<EpicVideo url="https://www.epicweb.dev/workshops/react-component-testing-with-vitest/vitest-browser-mode/playwright/solution" />
+
+Let's start by installing `playwright`:
+
+```sh nonumber
+npm i -D playwright
+```
+
+Playwright needs browser executables to be present on your machine to run. In this workshop, I am using Chromium as my browser of choice, so I can install just that particular browser by running the following command:
+
+```sh nonumber
+npx playwright install --with-deps chromium
+```
+
+> 🦉 You can provide the Playwright CLI with a specific browser you want to be installed. This reduces its footprint in the system by fetching only the browsers you need.
+
+The next step is to tell Vitest to use Playwright as the browser provider for component tests. In `vite.config.ts`, set the `test.browser.provider` option to `'playwright'`:
+
+```ts filename=vite.config.ts add=12
+/// <reference types="vitest" />
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+	plugins: [react(), tailwindcss()],
+	test: {
+		globals: true,
+		browser: {
+			enabled: true,
+			provider: 'playwright',
+			instances: [
+				{
+					browser: 'chromium',
+				},
+			],
+		},
+	},
+})
+```
+
+And, finally, let's update the type definitions for the assertion matchers to be those from Playwright in `tsconfig.test.json`:
+
+```json filename=tsconfig.test.json remove=9 add=10
+{
+	"extends": "./tsconfig.base.json",
+	"include": ["**/*.test.ts*"],
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "preserve",
+		"types": [
+			"vitest/globals",
+			"@vitest/browser/matchers",
+			"@vitest/browser/providers/playwright"
+		]
+	}
+}
+```
+
+This will make sure that the locators, user events, and matchers are correctly typed.
